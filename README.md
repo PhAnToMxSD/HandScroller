@@ -2,11 +2,6 @@
 
 A lightweight local web app that uses the laptop camera and hand landmarks to scroll a PDF without touching the keyboard or trackpad.
 
-## Run it
-
-1. Open a terminal in this folder.
-2. Start the local server:
-
 ## Gesture control
 
 Keep your hand in view of the camera.
