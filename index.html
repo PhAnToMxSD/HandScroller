@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hand Preview Scroll</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="./node_modules/@mediapipe/hands/hands.js"></script>
+    <script src="./node_modules/@mediapipe/camera_utils/camera_utils.js"></script>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Camera hand control</p>
+          <h1>Scroll a PDF with your hand.</h1>
+          <p class="lede">
+            Load a PDF, point your webcam at your hand, and use up-or-down hand position to move through pages without touching the keyboard or trackpad.
+          </p>
+        </div>
+
+        <div class="control-card">
+          <div class="actions">
+            <button id="startCamera" class="primary">Start camera</button>
+            <button id="stopCamera" class="ghost" disabled>Stop</button>
+          </div>
+
+          <div class="status-row">
+            <span id="cameraStatus" class="status-pill neutral">Camera idle</span>
+            <span id="gestureStatus" class="status-pill neutral">Waiting for a hand</span>
+          </div>
+
+          <p class="hint">
+            Gesture map: keep your hand above the center band to scroll up, below it to scroll down, and near the middle to pause.
+          </p>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside class="camera-panel">
+          <div class="panel-header">
+            <h2>Camera</h2>
+            <span class="panel-subtitle">Mirrored preview with live landmarks</span>
+          </div>
+          <div class="camera-frame">
+            <video id="cameraVideo" playsinline muted autoplay></video>
+            <canvas id="overlayCanvas"></canvas>
+            <div class="gesture-band band-top"></div>
+            <div class="gesture-band band-middle"></div>
+            <div class="gesture-band band-bottom"></div>
+            <div id="handDot" class="hand-dot"></div>
+            <div class="camera-empty" id="cameraEmpty">
+              <span>Start the camera to see your hand tracking feed here.</span>
+            </div>
+          </div>
+        </aside>
+
+        <section class="document-panel">
+          <div class="panel-header">
+            <h2>Document</h2>
+            <div class="panel-header-actions">
+              <span class="panel-subtitle">Scrolls automatically from hand motion</span>
+            </div>
+          </div>
+          <div class="document-toolbar">
+            <label class="file-picker" for="pdfFile">
+              <span class="file-picker-label">Load PDF</span>
+              <span id="fileName" class="file-picker-value">No document loaded</span>
+            </label>
+            <input id="pdfFile" type="file" accept="application/pdf" />
+            <div class="zoom-controls" aria-label="PDF zoom controls">
+              <button id="pdfZoomOut" class="ghost small" type="button">-</button>
+              <span id="pdfZoomValue" class="zoom-value">100%</span>
+              <button id="pdfZoomIn" class="ghost small" type="button">+</button>
+              <button id="pdfZoomReset" class="ghost small" type="button">Reset</button>
+            </div>
+            <button id="pdfFullscreenToggle" class="ghost small" type="button">Fullscreen</button>
+          </div>
+          <div id="pdfViewport" class="pdf-viewport">
+            <div id="pdfEmpty" class="pdf-empty">
+              <div class="pdf-empty-card">
+                <p class="empty-title">No PDF loaded</p>
+                <p class="empty-copy">Choose a PDF file above to begin. The document will render here and respond to your hand position.</p>
+              </div>
+            </div>
+            <div id="pdfPages" class="pdf-pages" hidden></div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
