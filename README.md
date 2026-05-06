@@ -7,13 +7,6 @@ A lightweight local web app that uses the laptop camera and hand landmarks to sc
 1. Open a terminal in this folder.
 2. Start the local server:
 
-```bash
-python3 server.py
-```
-
-3. Open the page at `http://127.0.0.1:8000/` if it does not open automatically.
-4. Load a PDF, then click **Start camera** and grant camera permission.
-
 ## Gesture control
 
 Keep your hand in view of the camera.
